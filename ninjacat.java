@@ -1,5 +1,4 @@
-// Critter class extension for a critter called a 'NinjaCat'
-// Author: Muhamad Nazir
+// NinjaCat critter by Muhamad Nazir
 
 import java.awt.Color;
 
