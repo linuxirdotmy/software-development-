@@ -8,12 +8,10 @@ public class NinjaCat extends Critter {
         infections=0;
     }
     
-    //display number of infections
     public String toString(){
         return "K: "+infections+"";
     }
     
-    //color is based on how many infections it has done
     public Color getColor(){
         if(infections==0){
            return Color.YELLOW; 
@@ -37,7 +35,6 @@ public class NinjaCat extends Critter {
         
     }
     
-    //same as giant
     public Critter.Action getMove(CritterInfo info){
        
       
