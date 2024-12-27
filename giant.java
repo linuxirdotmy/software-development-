@@ -1,44 +1,53 @@
 // Giant critter by Muhamad Nazir
 
-import java.awt.Color;
+import java.awt.*;
 
-public class Giant extends Critter {
-    
-    private int counter;
-    
+public class Giant extends Critter{
+    private int moves;
+
     public Giant(){
-        counter =1;
+        moves=1;
+        getColor();
     }
-    
-    public Color getColor(){
+
+    public Color getColor (){
         return Color.GRAY;
     }
 
-    public String toString(){
-        if(counter>18){
-            counter=1;
-        }
-        if (counter<=6){
+
+    public String toString() {
+        //"fee" for 6 moves, then "fie" for 6 moves, then "foe" for 6 moves, then "fum" for 6 moves, then repeat.
+        if (moves<=6){
             return "fee";
+        } else if (moves<=12){
+            return "fie";
+        } else if (moves<=18){
+            return "foe";
+        } else {
+            return "fum";
         }
-        else if(counter<=12){
-            return "fie";  
-        }
-        return "fum";
-        
     }
- 
-    public Action getMove(CritterInfo info){
-       
-        counter++;
+
+    public Action getMove(CritterInfo info) {
+        //always infect if an enemy is in front, otherwise hop if possible, otherwise turn right
+        //track moves
         if (info.getFront()==Neighbor.OTHER){
+            countMoves();
             return Action.INFECT;
-        }
-       else if(info.getFront()==Neighbor.EMPTY){
+        } else if(info.getFront()==Neighbor.EMPTY){
+            countMoves();
             return Action.HOP;
-        }
-        else{
+        } else {
+            countMoves();
             return Action.RIGHT;
+        }
+    }
+
+    public void countMoves(){
+        if (moves==24){
+            moves=1;
+        } else {
+            moves++;
         }
     }
 }
