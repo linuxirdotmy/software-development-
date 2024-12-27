@@ -1,53 +1,41 @@
 // NinjaCat critter by Muhamad Nazir
 
-import java.awt.Color;
+import java.awt.*;
 
-public class NinjaCat extends Critter {
-    private int infections;
-    public NinjaCat(){
-        infections=0;
+public class NinjaCat extends Tiger {
+
+    public boolean hasInfected;
+
+    public NinjaCat (){
+        hasInfected=false;
     }
-    
-    public String toString(){
-        return "K: "+infections+"";
-    }
-    
-    public Color getColor(){
-        if(infections==0){
-           return Color.YELLOW; 
-        }
-        else if(infections==1){
-            return Color.cyan;
-        }
-        else if (infections==2){
+
+    public Color getColor() {
+        if (hasInfected){
             return Color.MAGENTA;
-        }
-        else if (infections==3){
+        } else {
             return Color.orange;
         }
-        else if (infections==4){
-            return Color.PINK;
-        }
-        else if (infections==5){
-            return Color.GREEN;
-        }
-        return Color.RED;
-        
+
     }
-    
-    public Critter.Action getMove(CritterInfo info){
-       
-      
-        if (info.getFront()==Critter.Neighbor.OTHER){
-            infections++;
-            return Critter.Action.INFECT;
-      
+
+
+    public String toString() {
+        if (hasInfected){
+            return "Z";
+        } else {
+            return "z";
         }
-       else if(info.getFront()==Critter.Neighbor.EMPTY){
-            return Critter.Action.HOP;
+
+    }
+
+
+    public Action getMove(CritterInfo info) {
+        //same as Tiger, but changes color when has infected
+        if (info.getFront()==Neighbor.OTHER){
+            hasInfected=true;
         }
-        else{
-            return Critter.Action.RIGHT;
-        }
+        return super.getMove(info);
+
     }
 }
