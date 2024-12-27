@@ -1,35 +1,52 @@
-// this is tiger class
+// Tiger critter by Muhamad Nazir
 
-java
-import java.awt.*;
-import java.util.*;
+import java.awt.Color;
+
 public class Tiger extends Critter {
     private int moves;
     private Color currentColor;
-    private static final Color[] COLORS = {Color.RED, Color.GREEN, Color.BLUE};
-    public Tiger() {
-        this.moves = 0;
-        this.currentColor = COLORS[new Random().nextInt(COLORS.length)];
+ 
+    public Tiger(){
+        moves=0;
+        
     }
-    public Action getMove(CritterInfo info) {
-        if (info.getFront() == Neighbor.OTHER) {
+    
+    public Color getColor(){
+        int rand;
+        if(moves%3==0){
+            rand=(int) (Math.random()*2);
+            if(rand==0){
+                currentColor=Color.RED;
+            }
+            if(rand==1){
+               currentColor=Color.BLUE; 
+            }
+            if(rand==2){
+                currentColor=Color.GREEN;
+            }
+        }
+        return currentColor;
+        
+    }
+    
+    public String toString(){
+        return "TGR";
+    }
+    
+    public Action getMove(CritterInfo info){
+        moves++;
+        if(info.getFront()==Neighbor.OTHER){
             return Action.INFECT;
-        } else if (info.getFront() == Neighbor.WALL || info.getRight() == Neighbor.WALL) {
+        }
+        else if(info.getFront()==Neighbor.WALL||info.getRight()==Neighbor.WALL){
             return Action.LEFT;
-        } else if (info.getFront() == Neighbor.SAME) {
+        }
+        else if(info.getFront()==Neighbor.SAME){
             return Action.RIGHT;
-        } else {
+        }
+        else{
             return Action.HOP;
         }
     }
-    public Color getColor() {
-        if (moves % 3 == 0) {
-            currentColor = COLORS[new Random().nextInt(COLORS.length)];
-        }
-        moves++;
-        return currentColor;
-    }
-    public String toString() {
-        return "TGR";
-    }
-}
+   }
+
