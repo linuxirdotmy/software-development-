@@ -1,32 +1,43 @@
-// This is bear class
+// Bear Critter by Muhamad Nazir
 
-import java.awt.*;
+import java.awt.Color;
 
 public class Bear extends Critter {
     private boolean polar;
-    private boolean slash;
-
-    public Bear(boolean polar) {
-        this.polar = polar;
-        this.slash = true;
+    private int moves;
+    
+    public Bear(boolean polar){
+        this.polar=polar;
     }
-
-    public Action getMove(CritterInfo info) {
-        if (info.getFront() == Neighbor.OTHER) {
-            return Action.INFECT;
-        } else if (info.getFront() == Neighbor.EMPTY) {
-            return Action.HOP;
-        } else {
-            return Action.LEFT;
+    
+    public Color getColor() {
+        if(polar==true){
+            return Color.WHITE;
+        }
+        else{
+            return Color.BLACK;
         }
     }
 
-    public Color getColor() {
-        return polar ? Color.WHITE : Color.BLACK;
+    public String toString(){
+        if(moves%2==0){
+            return "/";
+        }
+        else{
+            return "\\" ;
+        }
     }
 
-    public String toString() {
-        slash = !slash;
-        return slash ? "/" : "\\";
+    public Action getMove(CritterInfo info){
+        moves++;
+        if (info.getFront()==Neighbor.OTHER){
+            return Action.INFECT;
+        }
+       else if(info.getFront()==Neighbor.WALL){
+            return Action.LEFT;
+        }
+        else{
+            return Action.HOP;
+        }
     }
 }
